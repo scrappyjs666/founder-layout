@@ -1,0 +1,34 @@
+@import "normalize.css";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Typography */
+  --main-color: rgba(0, 100, 235, 1);
+  --bgGrey-color: #E5E5E5;
+  --greyPagination-color: rgba(128, 128, 128, 1);
+  --black-color: rgba(0, 0, 0, 1);
+  --family: 'inter', sans-serif;
+  --fs-small: 14px;
+  --fs-16: 16px;
+  --fs-18: 18px;
+  --fs-24: 24px;
+  --fs-large: 32px;
+  --fw-light: 400;
+  --fw-normal: 500;
+  --fw-bold: 600;
+
+  /* Other */
+  --radii: 0.5rem;
+}
+
+body {
+  margin: 0;
+  font-family: var(--family);
+  color: var(--colors-text);
+  font-weight: var(--fw-light);
+  background-color: var(--colors-bg);
+}
