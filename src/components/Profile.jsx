@@ -9,53 +9,19 @@ const Wrapper = styled.article`
 `;
 
 const ProfileImage = styled.img`
-  display: block;
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  object-position: center;
-  box-shadow: var(--shadow);
+  border-radius: 50%;
+  max-width: 280px;
+  max-height: 280px;
 `;
 
-const ProfileBody = styled.div`
-  padding: 1rem 1.5rem 2rem;
-`;
 
-const ProfileTitle = styled.h3`
-  margin: 0;
-  font-size: var(--fs-md);
-  font-weight: var(--fw-bold);
-`;
-
-const ProfileList = styled.ul`
-  list-style: none;
-  margin: 0;
-  padding: 1rem 0 0;
-`;
-
-const ProfileListItem = styled.li`
-  font-size: var(--fs-sm);
-  line-height: 1.5;
-  font-weight: var(--fw-light);
-  & > b {
-    font-weight: var(--fw-bold);
-  }
-`;
-
-export const Profile = ({ img, name, info = [], onClick }) => {
+export const Profile = (props) => {
   return (
-    <Wrapper onClick={onClick}>
+    <Wrapper>
+      <ProfileRepo>Repositories ({RepoNum})</ProfileRepo>
       <ProfileImage src={img} alt={name} />
-      <ProfileBody>
-        <ProfileTitle>{name}</ProfileTitle>
-        <ProfileList>
-          {info.map((el) => (
-            <ProfileListItem key={el.title}>
-              <b>{el.title}:</b> {el.description}
-            </ProfileListItem>
-          ))}
-        </ProfileList>
-      </ProfileBody>
+      <ProfileName>{name}</ProfileName>
+      <ProfileLink>{name}</ProfileLink>
     </Wrapper>
   );
 };
