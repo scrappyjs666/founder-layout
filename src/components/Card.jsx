@@ -6,13 +6,12 @@ const Wrapper = styled.div`
   background-color: var(--white-color);
   max-width: 877px;
   border-radius: 6px;
-  grid-column-start: 2;
   margin-bottom: 24px; 
 `;
-const CardText = styled.div`
+
+const CardListItem = styled.li`
   padding: 24px 32px;
 `
-
 
 const CardTitle = styled.a `
   color: var(--main-color);
@@ -28,14 +27,23 @@ const CardDescription = styled.div `
   margin-top: 16px;                       
 `
 
+const CardList = styled.ul`
+  list-style: none;
+  margin: 0;
+`;
+
+
+
 export const Card = (props) => {
   return (
     <Wrapper>
-      <CardText>
+    <CardList>
+      <CardListItem>
         <CardTitle>{props.nameRepo}</CardTitle>
         <CardDescription>{props.description}</CardDescription>
         {/* <CardLogo src={props.img} alt={props.name} />  */}
-      </CardText>
+      </CardListItem>
+    </CardList>
     </Wrapper>
   );
 };

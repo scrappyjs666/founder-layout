@@ -1,55 +1,46 @@
 import axios from 'axios';
 import './App.scss';
-import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Main } from './components/Main';
 import { Card } from './components/Card';
+import { ReposInfo } from './components/ReposInfo';
+import { Profile } from './components/Profile';
 
-
-// const REPOS = 'https://api.github.com/users/USERNAME/repos';
-// const OriginName = 'scrappyjs666'
-// const USERS = 'https://api.github.com/users/'+OriginName;
-
-//  useEffect(() => {
-//     const findUser = axios.get('https://api.github.com/users/'+OriginName).then(({ data }) => console.log(data));
-//     const findRepoUser = axios.get('https://api.github.com/users/'+OriginName+'/repos').then(({ data }) => console.log(data));
-//   }, [name]);
-
-// axios.get('https://api.github.com/users/'+OriginName).then(({ data }) => console.log(data));
-// axios.get('https://api.github.com/users/'+OriginName+'/repos').then(({ data }) => console.log(data));
-
-let RespUserRepos;
-let RespUser;
-async function inputValue() {
-  console.log()
-  let OriginName = document.querySelector('.inpq').value;
-  console.log(OriginName)
-  RespUserRepos = await (await axios.get('https://api.github.com/users/'+OriginName+'/repos')).data;
-  RespUser = await (await axios.get('https://api.github.com/users/'+OriginName)).data;
-  console.log(RespUserRepos)
-  console.log(RespUser);
-}
-
-// {cards.map((card) => 
-//       <Card nameRepo ={card.obj} description = {'mem'}/>)}
-function App({children}) {
-  const [cards, setCards] = useState([])
-  const [user, setUser] = useState([])
+function App() {
+  const [userNickName, setUserNickName] = useState('');
+  const [userProfile, setUserProfile] = useState('')
+  const [repos, setRepos] = useState([])
+  const [inputValue, setinputValue] = useState('')
+  
+  
+  async function findUser() {
+    setUserNickName(inputValue);
+    let RespUserRepos = await (await axios.get('https://api.github.com/users/'+inputValue+'/repos')).data;
+    let RespUser = await (await axios.get('https://api.github.com/users/'+inputValue)).data;
+    setRepos(RespUserRepos);
+    setUserProfile(RespUser)
+    console.log(RespUserRepos)
+    console.log(RespUser);
+    console.log(userProfile.avatar_url)
+  }
+  
   useEffect(() => {
-    axios.get('https://api.github.com/users/'+'scrappyjs666'+'/repos').then(({ data }) => setCards(data));
-    axios.get('https://api.github.com/users/'+'scrappyjs666').then(({ data }) => setUser(data));
-    console.log(setCards)
-    console.log(cards)
-    console.log(user)
-  }, []);
+    console.log('repos')
+  }, [userNickName]);
+  
   return (
     <div>
-      <button onClick={inputValue} className='click'>click me</button>
-      <input className='inpq'></input>
-      <Header/>
-      <Main repoNumber = {cards.length} ProfileImage = {user.avatar_url}>
-      {cards.map((card) => <Card nameRepo ={card.name} description = {card.description} key = {card.name}/>)}
+      <Header>
+        <button onClick={() => findUser()}>click me</button>
+        <input  onChange={event => setinputValue(event.target.value)} />
+      </Header>
+      <Main>
+        <Profile ProfileImage = {userProfile.avatar_url} ProfileName = {userProfile.name} ProfileUserName = {userProfile.login}  ProfileFollowers = {userProfile.followers}   ProfileFollowing = {userProfile.following}>
+        </Profile>
+        <ReposInfo Title = {'Repositories'} ReposNumber = {repos.length}>
+        {repos.map((card) => <Card nameRepo ={card.name} description = {card.description} key = {card.name}/>)}
+        </ReposInfo>
       </Main>
     </div>
   );      
