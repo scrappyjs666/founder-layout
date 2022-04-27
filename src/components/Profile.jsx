@@ -3,15 +3,14 @@ import { Container } from './Container';
 import socialPerson from './social-person.svg';
 import socialTwoPerson from './social-twoperson.svg';
 
-const ProfileImage = styled.img`
+const Image = styled.img`
   border-radius: 50%;
   max-width: 280px;
   max-height: 280px;
-  float: left;
   margin: 0 100px 29px 0;
 `;
 
-const ProfileName = styled.div`
+const Name = styled.div`
   max-width: 170px;
   overflow: hidden;
   color: var(--black-color);
@@ -21,7 +20,7 @@ const ProfileName = styled.div`
   margin-bottom: 12px;
 `
 
-const ProfileUserName = styled.a`
+const UserName = styled.a`
   max-width: 81px;
   overflow: hidden;
   color: var(--main-color);
@@ -30,51 +29,51 @@ const ProfileUserName = styled.a`
   line-height: 22px;
 `
 
-const ProfileSubscriptions = styled.div`
+const Subscriptions = styled.div`
   display:flex;
   gap: 20px;
   margin-top: 25px;
 `
 
-const ProfileFollowers = styled.div`
+const Followers = styled.div`
   color: var(--black-color);
   font-weight: var(--fw-light);
   font-size: var(--fs-16);
   line-height: 24px;
 `
-const ProfileFollowing = styled.div`
+const Following = styled.div`
   color: var(--black-color);
   font-weight: var(--fw-light);
   font-size: var(--fs-16);
   line-height: 24px;
 `
 
-const ProfileSocial = styled.img `
+const Social = styled.img `
   ;
 `
-ProfileSocial.defaultProps = {
+Social.defaultProps = {
   src: socialPerson,
 };
 
-const ProfileTwoSocial = styled.img `
+const TwoSocial = styled.img `
   ;
 `
-ProfileTwoSocial.defaultProps = {
+TwoSocial.defaultProps = {
   src: socialTwoPerson,
 };
 
 
 
-export const Profile = (props) => {
+export const Profile = ({avatar,name,userName,followers,following}) => {
   return (
       <Container>
-      <ProfileImage src = {props.ProfileImage} alt = {'image'}/>
-        <ProfileName>{props.ProfileName}</ProfileName>
-        <ProfileUserName>{props.ProfileUserName}</ProfileUserName>
-        <ProfileSubscriptions>
-          <ProfileSocial /> <ProfileFollowers>Followers {props.ProfileFollowers}</ProfileFollowers>
-          <ProfileTwoSocial /> <ProfileFollowing>Following {props.ProfileFollowing}</ProfileFollowing>
-        </ProfileSubscriptions>
+      <Image src = {avatar} alt = {'image'}/>
+        <Name>{name}</Name>
+        <UserName>{userName}</UserName>
+        <Subscriptions>
+          <Social /> <Followers>Followers {followers}</Followers>
+          <TwoSocial /> <Following>Following {following}</Following>
+        </Subscriptions>
       </Container>
   );
 };

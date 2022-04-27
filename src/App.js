@@ -13,33 +13,43 @@ function App() {
   const [repos, setRepos] = useState([])
   const [inputValue, setinputValue] = useState('')
   
+  //pagination
+  const [reposNumber, setReposNumber] = useState(0);
+  const [pageNumber, setPageNumber] = useState(0)
+
+
   
+  const usersUrl = 'https://api.github.com/users/';
   async function findUser() {
     setUserNickName(inputValue);
-    let RespUserRepos = await (await axios.get('https://api.github.com/users/'+inputValue+'/repos')).data;
-    let RespUser = await (await axios.get('https://api.github.com/users/'+inputValue)).data;
+    let RespUserRepos = await (await axios.get(usersUrl + inputValue+'/repos')).data;
+    let RespUser = await (await axios.get(usersUrl + inputValue)).data;
     setRepos(RespUserRepos);
     setUserProfile(RespUser)
-    console.log(RespUserRepos)
-    console.log(RespUser);
-    console.log(userProfile.avatar_url)
   }
-  
+
+
   useEffect(() => {
-    console.log('repos')
-  }, [userNickName]);
-  
+    setReposNumber(repos.length)
+    setPageNumber(Math.round(reposNumber/4))
+    console.log(pageNumber)
+    console.log(reposNumber)
+  }, [userProfile]);
+
+
   return (
     <div>
-      <Header>
-        <button onClick={() => findUser()}>click me</button>
-        <input  onChange={event => setinputValue(event.target.value)} />
-      </Header>
+      <Header findUser={findUser} setinputValue={setinputValue} />
       <Main>
-        <Profile ProfileImage = {userProfile.avatar_url} ProfileName = {userProfile.name} ProfileUserName = {userProfile.login}  ProfileFollowers = {userProfile.followers}   ProfileFollowing = {userProfile.following}>
-        </Profile>
-        <ReposInfo Title = {'Repositories'} ReposNumber = {repos.length}>
-        {repos.map((card) => <Card nameRepo ={card.name} description = {card.description} key = {card.name}/>)}
+        <Profile
+          avatar={userProfile.avatar_url}
+          name={userProfile.name}
+          userNamel={userProfile.userName}
+          followers={userProfile.followers}
+          following={userProfile.following}
+        />
+        <ReposInfo title = {'Repositories'} reposNumber = {reposNumber}>
+        {repos.map((card ) => <Card name={card.name} description={card.description} key = {card.name}/>)}
         </ReposInfo>
       </Main>
     </div>

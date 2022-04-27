@@ -10,11 +10,11 @@ const Title = styled.h1`
 `
 
 
-export const ReposInfo = (props) => {
+export const ReposInfo = ({title,reposNumber,children}) => {
   return (
       <Container>
-        <Title>{props.Title} ({props.ReposNumber})</Title>
-        {props.children}
+        <Title>{title} ({reposNumber})</Title>
+        {children}
       </Container>
   );
 };

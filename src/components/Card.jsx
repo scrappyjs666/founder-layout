@@ -34,13 +34,13 @@ const CardList = styled.ul`
 
 
 
-export const Card = (props) => {
+export const Card = ({name, description}) => {
   return (
     <Wrapper>
     <CardList>
       <CardListItem>
-        <CardTitle>{props.nameRepo}</CardTitle>
-        <CardDescription>{props.description}</CardDescription>
+        <CardTitle>{name}</CardTitle>
+        <CardDescription>{description}</CardDescription>
         {/* <CardLogo src={props.img} alt={props.name} />  */}
       </CardListItem>
     </CardList>

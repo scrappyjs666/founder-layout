@@ -13,11 +13,11 @@ const Wrapper = styled.div`
 
 
 
-export const Main = (props) => {
+export const Main = ({children}) => {
   return (
       <Container>
         <Wrapper>
-          {props.children}
+          {children}
         </Wrapper>
       </Container>
   );
