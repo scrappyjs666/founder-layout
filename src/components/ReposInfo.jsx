@@ -7,13 +7,14 @@ const Title = styled.h1`
   font-weight: var(--fw-bold);
   font-size: var(--fs-large);
   margin-bottom: 29px;
+  line-height: 42px;
 `
 
 
-export const ReposInfo = ({title,reposNumber,children}) => {
+export const ReposInfo = ({title,reposCount,children}) => {
   return (
       <Container>
-        <Title>{title} ({reposNumber})</Title>
+        <Title>{title} ({reposCount})</Title>
         {children}
       </Container>
   );

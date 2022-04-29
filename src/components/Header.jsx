@@ -3,7 +3,7 @@ import { Container } from './Container';
 import githublogo from './githublogo.png';
 import inputimg from './inputimg.svg';
 
-const Wrapper = styled.div`
+const Wrapper = styled.header`
   background-color: var(--main-color);
   height: 73px;
 `;
@@ -13,7 +13,11 @@ const Input = styled.input`
   margin: 16px 0 16px 0px;
   border-radius: 6px;
   padding: 9px 0px 9px 40px;
-  border: none;
+  color: var(--black-color);
+  font-weight: var(--fw-light);
+  font-size: var(--fs-small);
+  line-height: 17px;
+  letter-spacing: 1%;
 `
 const Logo = styled.img`
   float: left;
@@ -24,7 +28,7 @@ Logo.defaultProps = {
 };
 
 const InputWrapper = styled.div`
-  position: relative;
+  position: relative; 
 `
 
 const Btn = styled.img`
@@ -43,10 +47,10 @@ export const Header = ({findUser, setinputValue, children}) => {
       <Container>
         <Wrapper>
           {children}
+          <Logo/>
           <InputWrapper>
             <Btn onClick={() => findUser()}/>
-            <Logo/>
-            <Input onChange={event => setinputValue(event.target.value)}/>
+            <Input placeholder = {'Enter GitHub username'} onChange={event => setinputValue(event.target.value)}/>
           </InputWrapper>
         </Wrapper>
       </Container>

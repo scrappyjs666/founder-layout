@@ -30,18 +30,18 @@ const CardDescription = styled.div `
 const CardList = styled.ul`
   list-style: none;
   margin: 0;
+  padding: 0;
 `;
 
 
 
-export const Card = ({name, description}) => {
+export const Card = ({name, description,link}) => {
   return (
     <Wrapper>
     <CardList>
       <CardListItem>
-        <CardTitle>{name}</CardTitle>
+        <CardTitle href= {link} target="_blank">{name}</CardTitle>
         <CardDescription>{description}</CardDescription>
-        {/* <CardLogo src={props.img} alt={props.name} />  */}
       </CardListItem>
     </CardList>
     </Wrapper>

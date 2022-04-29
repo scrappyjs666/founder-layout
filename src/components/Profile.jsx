@@ -10,7 +10,11 @@ const Image = styled.img`
   margin: 0 100px 29px 0;
 `;
 
-const Name = styled.div`
+const ImageWrapp = styled.a`
+
+`
+
+const Name = styled.h2`
   max-width: 170px;
   overflow: hidden;
   color: var(--black-color);
@@ -31,7 +35,6 @@ const UserName = styled.a`
 
 const Subscriptions = styled.div`
   display:flex;
-  gap: 20px;
   margin-top: 25px;
 `
 
@@ -40,6 +43,7 @@ const Followers = styled.div`
   font-weight: var(--fw-light);
   font-size: var(--fs-16);
   line-height: 24px;
+  margin-right: 20px;
 `
 const Following = styled.div`
   color: var(--black-color);
@@ -49,6 +53,7 @@ const Following = styled.div`
 `
 
 const Social = styled.img `
+  margin-right: 12px;
   ;
 `
 Social.defaultProps = {
@@ -56,6 +61,7 @@ Social.defaultProps = {
 };
 
 const TwoSocial = styled.img `
+  margin-right: 12px;
   ;
 `
 TwoSocial.defaultProps = {
@@ -64,12 +70,14 @@ TwoSocial.defaultProps = {
 
 
 
-export const Profile = ({avatar,name,userName,followers,following}) => {
+export const Profile = ({avatar,name,userName,followers,following, link}) => {
   return (
       <Container>
-      <Image src = {avatar} alt = {'image'}/>
+      <ImageWrapp href= {link} target="_blank">
+        <Image src = {avatar} alt = {'image'}/>
+      </ImageWrapp>
         <Name>{name}</Name>
-        <UserName>{userName}</UserName>
+        <UserName href= {link} target="_blank">{userName}</UserName>
         <Subscriptions>
           <Social /> <Followers>Followers {followers}</Followers>
           <TwoSocial /> <Following>Following {following}</Following>

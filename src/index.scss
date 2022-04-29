@@ -5,13 +5,22 @@
   box-sizing: border-box;
 }
 
+input::-webkit-input-placeholder       {opacity: 1; transition: opacity 0.3s ease;}
+input::-moz-placeholder                {opacity: 1; transition: opacity 0.3s ease;}
+input:-moz-placeholder                 {opacity: 1; transition: opacity 0.3s ease;}
+input:-ms-input-placeholder            {opacity: 1; transition: opacity 0.3s ease;}
+input:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s ease;}
+input:focus::-moz-placeholder          {opacity: 0; transition: opacity 0.3s ease;}
+input:focus:-moz-placeholder           {opacity: 0; transition: opacity 0.3s ease;}
+input:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s ease;}
+
 :root {
   /* Typography */
   --main-color: rgba(0, 100, 235, 1);
   --white-color: rgba(255, 255, 255, 1);
   --black-color: rgba(0, 0, 0, 1);
   --bgGrey-color: #E5E5E5;
-  --greyPagination-color: rgba(128, 128, 128, 1);
+  --grey-color: rgba(128, 128, 128, 1);
   --family-inter: 'inter', sans-serif;
   --fs-small: 14px;
   --fs-16: 16px;
@@ -36,4 +45,22 @@ body {
 
 h1 {
   margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+
+input::placeholder {
+  border: none;
+  font-weight: var(--fw-light);
+  font-size: var(--fs-small);
+  color: var(--grey-color);
+  line-height: 17px;
+  letter-spacing: 1%;
 }
