@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Union from './Union.png'
+import listEmpty from './images/listEmpty.png'
 const Wrapper = styled.ul`
   display: flex;
   flex-direction: column;
@@ -11,7 +11,7 @@ const Circle = styled.img`
   margin-bottom: 48px;
 `
 Circle.defaultProps = {
-  src: Union,
+  src: listEmpty,
 };
 
 const Text = styled.span`
@@ -24,7 +24,7 @@ const Text = styled.span`
 export const RepositoryEmpty = () => {
   return (
     <Wrapper>
-      <Circle src = {Union} alt = {'image Repository list is empty'}/>
+      <Circle src = {listEmpty} alt = {'image Repository list is empty'}/>
       <Text>Repository list is empty</Text>
     </Wrapper>
   );

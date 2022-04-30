@@ -26,7 +26,6 @@ export const MainPage = () => {
   const pageSize = 4;
   //loading
   const [loading, setLoading] = useState(false);
-  
   const usersUrl = 'https://api.github.com/users/';
   async function findUser() {
     setLoading(true);
@@ -36,6 +35,8 @@ export const MainPage = () => {
     setRepos(RespUserRepos);
     setUserProfile(RespUser);
     setLoading(false);
+    console.log(RespUserRepos)
+    console.log(RespUser)
   }
   
   
@@ -44,6 +45,7 @@ export const MainPage = () => {
     const lastReposIndex = value * pageSize;
     const firstReposIndex = lastReposIndex - pageSize;
     setCurrentRepos(repos.slice(firstReposIndex , lastReposIndex))
+    console.log(reposCount, 'reposCOunt')
   };
 
   
@@ -53,7 +55,7 @@ export const MainPage = () => {
   }, [userProfile]); 
   return (
     <>
-      <Header findUser={findUser} setinputValue={setinputValue} />
+      <Header findUser={findUser} setinputValue= {setinputValue}  urlLink={inputValue}/>
       <Main>
       {userProfile?   
         <>
@@ -69,7 +71,7 @@ export const MainPage = () => {
         <ReposInfo title = {'Repositories'} reposCount = {reposCount}>
         {currentRepos.map((card) =>
           <Card name={card.name} link={card.html_url} description={card.description} key = {card.name}/>)}
-          <PaginateBar firstReposIndex = {page*4} lastReposIndex = {4} reposCount ={reposCount}>
+          <PaginateBar firstReposIndex = {pageSize*page<= reposCount ? pageSize*page-4 : reposCount} lastReposIndex = {pageSize*page<= reposCount ? pageSize*page : reposCount} reposCount ={reposCount}>
             <Pagination  
             page={page} 
             onChange={handleChange} 
@@ -83,7 +85,6 @@ export const MainPage = () => {
         <RepositoryEmpty/>}
         </>
       : <StartSearching/>}
-        
       </Main>
       </>
   );

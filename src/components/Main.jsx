@@ -7,7 +7,6 @@ const Wrapper = styled.main`
   grid-template-columns: 30% 70%;
   background-color: var(--bgGrey-color);
   padding: 40px 56px;
-  height: 695px;
   overflow: hidden;
 `;
 

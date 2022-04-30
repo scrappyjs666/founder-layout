@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { Container } from './Container';
-import loupe from './images/loupe.png';
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,29 +14,18 @@ const Wrapper = styled.div`
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 `
-const ImageLoupe = styled.img `
-  margin-bottom: 47px;
-`
-ImageLoupe.defaultProps = {
-  src: loupe,
-};
-
-const Text = styled.h1`
-  max-width: 210px;
+const Text = styled.span`
   font-weight: var(--fw-light);
-  font-size: 22px;
+  font-size: 32px;
   line-height: 31px;
   color: var(--grey-color);
   text-align: center;
 `
 
-export const StartSearching = () => {
+export const Page404 = () => {
   return (
-    <Container>
       <Wrapper>
-        <ImageLoupe alt = {'image Start with searching a GitHub user'}/>
-        <Text>Start with searching a GitHub user</Text>
+        <Text>404 Page Not Found</Text>
       </Wrapper>
-    </Container>
   );
 };

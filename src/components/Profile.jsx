@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Container } from './Container';
-import socialPerson from './social-person.svg';
-import socialTwoPerson from './social-twoperson.svg';
+import socialPerson from './images/social-person.svg';
+import socialTwoPerson from './images/social-twoperson.svg';
 
 const Image = styled.img`
   border-radius: 50%;
