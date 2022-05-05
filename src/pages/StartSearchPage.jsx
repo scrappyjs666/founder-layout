@@ -1,6 +1,7 @@
-import { StartSearching } from '../components/StartSearching';
-import { Header } from '../components/Header';
-import { Main } from '../components/Main';
+import { StartSearching } from '@components/StartSearching/StartSearching';
+import { Header } from '@components/Header/Header';
+import { Main } from '@components/Main/Main';
+
 export const StartSearchingPage = () => {
   return (
     <>

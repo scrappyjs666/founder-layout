@@ -1,0 +1,33 @@
+.wrapper {
+  display: grid;
+  align-items: center;
+  background-color: var(--white-color);
+  max-width: 877px;
+  border-radius: 6px;
+  margin-bottom: 24px; 
+}
+
+.card__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.card__item{
+  padding: 24px 32px;
+}
+
+.card__name {
+  color: var(--main-color);
+  font-weight: var(--fw-normal);
+  font-size: var(--fs-24);
+  line-height: 29px; 
+}
+
+.card__description {
+  color: var(--black-color);
+  font-weight: var(--fw-light);
+  font-size: var(--fs-16);
+  line-height: 19px;
+  margin-top: 16px; 
+}

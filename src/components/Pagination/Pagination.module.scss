@@ -1,0 +1,47 @@
+.pagination__list {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color:rgba(128, 128, 128, 1);
+  user-select: none;
+}
+
+.pagination__item {
+  color:rgba(128, 128, 128, 1);
+  cursor: pointer;
+  text-decoration: none;
+  &:not(:last-child) {
+    margin-right: 22px;
+  }
+} 
+
+.active {
+  padding: 2px 6px;
+  border-radius: 3px;
+  background-color:rgba(0, 100, 235, 1);
+  color:rgba(255, 255, 255, 1);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+
+.pagination__count {
+  margin-right: 24px;
+}
+
+.card {
+  background-color: fff;
+  border: 1px solid #000;
+  margin:10px;
+  padding: 10px;
+  max-width: 200px;
+}
+
+.input {
+  margin: 10px;
+}

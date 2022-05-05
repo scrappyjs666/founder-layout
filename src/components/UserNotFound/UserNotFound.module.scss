@@ -1,0 +1,18 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.userNotFound__image {
+  margin-bottom: 47px;
+}
+
+.userNotFound__text {
+  font-weight: var(--fw-light);
+  font-size: 22px;
+  line-height: 31px;
+  color: var(--grey-color);
+  text-align: center;
+}

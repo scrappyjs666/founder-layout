@@ -1,0 +1,49 @@
+.profile__image {
+  border-radius: 50%;
+  max-width: 280px;
+  max-height: 280px;
+  margin: 0 100px 29px 0;
+}
+
+.profile__name {
+  max-width: 170px;
+  overflow: hidden;
+  color: var(--black-color);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-24);
+  line-height: 34px;
+  margin-bottom: 12px;
+}
+
+.profile__link {
+  max-width: 81px;
+  overflow: hidden;
+  color: var(--main-color);
+  font-weight: var(--fw-light);
+  font-size: var(--fs-24);
+  line-height: 22px;
+}
+
+.profile__subscriptions {
+  display:flex;
+  margin-top: 25px;
+}
+
+.profile__followers {
+  color: var(--black-color);
+  font-weight: var(--fw-light);
+  font-size: var(--fs-16);
+  line-height: 24px;
+  margin-right: 20px;
+}
+
+.profile__following {
+  color: var(--black-color);
+  font-weight: var(--fw-light);
+  font-size: var(--fs-16);
+  line-height: 24px;
+}
+
+.profilesocial__image {
+  margin-right: 12px
+}

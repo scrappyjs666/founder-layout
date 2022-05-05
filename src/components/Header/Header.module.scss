@@ -1,0 +1,32 @@
+.wrapper {
+  background-color: var(--main-color);
+}
+
+.header__input {
+  max-width: 500px;
+  margin: 16px 0 16px 0px;
+  border-radius: 6px;
+  padding: 9px 0px 9px 40px;
+  color: var(--black-color);
+  font-weight: var(--fw-light);
+  font-size: var(--fs-small);
+  line-height: 17px;
+  letter-spacing: 1%;
+}
+
+.header__logo {
+  float: left;
+  margin: 13px 22px 16px 41px;
+}
+
+.input__wrapper {
+  position: relative;
+}
+
+.header__btn {
+  position: absolute;
+  top: 40%;
+  left: 9%;
+  z-index: 1;
+  cursor: pointer;
+}
