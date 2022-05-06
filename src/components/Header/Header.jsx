@@ -1,35 +1,41 @@
 import { Container } from '../Container/Container';
 import githublogo from './img/githublogo.png';
-import inputimg from './img/loupe.svg';
 import styles from './Header.module.scss'
 
 
 
-export const Header = ({findUser, setinputValue, children, urlLink}) => {
+export const Header = ({findUser, setinputValue, children}) => {
   return (
-      <Container>
-        <div className = {styles.wrapper}>
-          {children}
-          <div className = {styles.input__wrapper}>
-          <img 
-          className = {styles.header__logo} 
-          src = {githublogo} alt = {'image githublogo'}
-          />
-          <div>
-          <img 
-            className = {styles.header__btn}
-            src = {inputimg} 
-            alt = {'input img'}  
-            onClick={() => findUser()}/>
-            <input 
-              className = {styles.header__input}
-              placeholder = {'Enter GitHub username'} 
-              onChange={event => setinputValue(event.target.value)} 
-              onKeyPress={(e) => e.key === 'Enter' && findUser()}/>
+    <Container>
+      <div className={styles.header__wrapper}>
+      {children}
+        <header  className = {styles.header}>
+          <a href="#">
+            <img
+              draggable="false"
+              src={githublogo}
+              alt="image GitHub logo"
+              className={styles.header__logo}
+            />
+          </a>
+          <div className={styles.header__input}>
+            <form action="#" type="submit">
+              <input
+                placeholder = {'Enter GitHub username'} 
+                onChange={event => setinputValue(event.target.value)} 
+                onKeyPress={(e) => e.key === 'Enter' && findUser()}
+                type="text"
+                className={styles.input}
+              />
+              <button
+                onClick={() => findUser()}
+                type='button'
+                className={styles.header__loupe}>
+              </button>
+            </form>
           </div>
-          </div>
-        </div>
-      </Container>
+        </header>
+      </div>
+    </Container>
   );
 };
-

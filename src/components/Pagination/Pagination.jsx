@@ -22,13 +22,11 @@ const Pagination = ({handleClickPrev, pageSize, page, reposCount, amount, handle
   return (
     <Router>
       <ul className={styles.pagination__list}>
-        <img
-          draggable="true"
-          style={{ marginRight: "25px", transform: "rotate(180deg)" }}
-          src={arrowright}
-          alt={'arrowright'}
-          onClick={() => handleClickPrev()}
-        />
+        <div 
+          className={styles['pagination__arrowleft']}
+          draggable="false"
+          onClick={() => handleClickPrev()}>
+        </div>
         <div className={styles.pagination__count}>
           {pageSize * page <= reposCount ? pageSize * page - 4 : reposCount}-
           {pageSize * page <= reposCount ? pageSize * page : reposCount} of{" "}
@@ -75,12 +73,11 @@ const Pagination = ({handleClickPrev, pageSize, page, reposCount, amount, handle
             return PaginationButton(page, handleChange, res);
           })
         )}
-        <img
-          draggable="true"
-          src={arrowleft}
-          alt={'arrowleft'}
-          onClick={() => handleClickNext()}
-        />
+        <div 
+          className = {styles.pagination__arrowright}
+          draggable="false"
+          onClick={() => handleClickNext()}>
+        </div>
       </ul>
       </Router>
   );

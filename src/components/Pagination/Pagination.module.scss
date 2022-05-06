@@ -1,6 +1,7 @@
 .pagination__list {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   list-style-type: none;
   font-family: Inter, sans-serif;
   font-weight: 400;
@@ -44,4 +45,27 @@
 
 .input {
   margin: 10px;
+}
+
+.pagination__arrowleft {
+  width: 7px;
+  height: 12px;
+  transform: rotate(180deg);
+  margin-right: 25px;
+  cursor: pointer;
+  border: none;
+  background-image: url(./img/arrowleft.svg);
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+
+.pagination__arrowright {
+  width: 7px;
+  height: 12px;
+  margin-left: 26px;
+  cursor: pointer;
+  border: none;
+  background-image: url(./img/arrowright.svg);
+  background-repeat: no-repeat;
+  background-color: transparent;
 }

@@ -1,22 +1,18 @@
-
-//lib
-import axios from 'axios';
 //components
 import { Header } from '@components/Header/Header'
 import { Main } from '@components/Main/Main';
 import { Card } from '@components/Card/Card'
-import { ReposInfo } from '@components/ReposInfo/ReposInfo';
-import { Profile } from '@components/Profile/Profile';
-import { PaginateBar } from '@components/PaginateBar/PaginateBar';
+import { UserRepositories } from '@components/UserRepositories/UserRepositories';
+import { UserProfile } from '@components/UserProfile/UserProfile';
 import { RepositoryEmpty } from '@components/RepositoryEmpty/RepositoryEmpty';
 import { StartSearching } from '@components/StartSearching/StartSearching';
 import Pagination from '@components/Pagination/Pagination';
+import  { getApiResource } from '../utils/network';
 //hooks
 import { useState, useEffect, useCallback } from 'react';
 //constants
 import {usersUrl } from '../constants/api.js'
 
-import  { getApiResource } from '../utils/network';
 
 export const MainPage = () => {
   const [userNickName, setUserNickName] = useState('');
@@ -33,20 +29,22 @@ export const MainPage = () => {
   //loading
   const [loading, setLoading] = useState(false);
 
-  const  findUser =  useCallback(() => {
+  const findUser =  useCallback( async () => {
+  console.log('a')
   setUserNickName(inputValue);
   const reposUrl = usersUrl + inputValue + "/repos?page=" +  githubPage ;
   const profileUrl = usersUrl + inputValue;
-  getApiResource(reposUrl)
+  await getApiResource(reposUrl)
     .then(data => {
     setRepos([...data, ...repos]);
     console.log(repos)
   });
-  getApiResource(profileUrl)
+  await getApiResource(profileUrl)
     .then(data => {
     setUserProfile(data);
     console.log(userProfile)
   });
+  console.log('finduser', repos)
 }, [inputValue])
 
     
@@ -58,14 +56,18 @@ export const MainPage = () => {
     })
       console.log(githubPage, 'githubpage')
       findUser();
+      console.log(repos)
     }
   },[page]);
 
-  useEffect(() => {
-    setPage(page);
+  function findReposInex() {
     const lastReposIndex = page * pageSize;
     const firstReposIndex = lastReposIndex - pageSize;
     setCurrentRepos(repos.slice(firstReposIndex, lastReposIndex));
+  }
+
+  useEffect(() => {
+    findReposInex() 
   }, [handleChange]);
 
   const handleClickPrev = () => {
@@ -85,6 +87,7 @@ export const MainPage = () => {
   };
 
   useEffect(() => {
+    console.log('useeffect', repos)
     setReposCount(userProfile.public_repos);
     setCurrentRepos(repos.slice(0, pageSize));
   }, [userProfile]);
@@ -98,11 +101,14 @@ export const MainPage = () => {
   const amount = Array.from(Array(pages.length), (_, i) => i);
   return (
     <>
-      <Header findUser={findUser} setinputValue={setinputValue} />
+      <Header 
+        findUser={findUser} 
+        setinputValue={setinputValue} 
+      />
       <Main>
       {userProfile?   
         <>
-          <Profile
+          <UserProfile
           avatar={userProfile.avatar_url}
           name={userProfile.name} 
           userName={userProfile.login} 
@@ -111,18 +117,20 @@ export const MainPage = () => {
           following={userProfile.following}
         />
         {reposCount ? 
-        <ReposInfo 
+        <UserRepositories
         title = {'Repositories'}
         reposCount = {reposCount}>
-        {currentRepos.map((card) =>
+          <ul 
+            className={'card__list'}>
+          {currentRepos.map((el) =>
           <Card 
-            name={card.name} 
-            link={card.html_url} 
-            description={card.description 
-            ? card.description 
+            name={el.name} 
+            link={el.html_url} 
+            description={el.description 
+            ? el.description 
             : '!-------The author has not written a description yet---------!'} 
-            key = {card.name}/>)}
-          <PaginateBar>
+            key = {el.html_url}/>)}
+          </ul>
           <Pagination 
             setinputValue = {setinputValue}
             handleClickPrev = {handleClickPrev}
@@ -134,8 +142,7 @@ export const MainPage = () => {
             currentRepos = {currentRepos}
             handleClickNext = {handleClickNext}
           />
-          </PaginateBar>
-        </ReposInfo>
+        </UserRepositories>
           : 
         <RepositoryEmpty/>}
         </>

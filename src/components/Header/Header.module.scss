@@ -1,32 +1,54 @@
-.wrapper {
-  background-color: var(--main-color);
+.header__wrapper {
+  background-color: var(--color-blue);
 }
 
-.header__input {
-  max-width: 500px;
-  margin: 16px 0 16px 0px;
-  border-radius: 6px;
-  padding: 9px 0px 9px 40px;
-  color: var(--black-color);
-  font-weight: var(--fw-light);
-  font-size: var(--fs-small);
-  line-height: 17px;
-  letter-spacing: 1%;
+.header {
+  width: 100%;
+  max-width: 1406px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-blue);
 }
 
 .header__logo {
-  float: left;
-  margin: 13px 22px 16px 41px;
+  margin: 16px 27px 16px 41px;
 }
 
-.input__wrapper {
+.header__input {
   position: relative;
 }
 
-.header__btn {
+.input {
+  width: 500px;
+  border-radius: 6px;
+  border: none;
+  padding: 11px 0 11px 41px;
+  color: var(--color-black);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-light);
+  line-height: 1.2;
+  letter-spacing: 1%;
+  outline: none;
+}
+
+input::placeholder {
+  color: var(--color-grey);
+  font-weight: var(--fw-light);
+  font-size: var(--fs-14);
+  line-height: 1.2;
+  letter-spacing: 1%;
+}
+
+.header__loupe {
+  width: 14px;
+  height: 14px;
   position: absolute;
-  top: 40%;
-  left: 9%;
-  z-index: 1;
+  top: 33%;
+  left: 3%;
   cursor: pointer;
+  border: none;
+  background-image: url(./img/loupe.svg);
+  background-repeat: no-repeat;
+  background-color: transparent;
 }

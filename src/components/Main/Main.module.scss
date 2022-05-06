@@ -1,7 +1,14 @@
-.main {
-  display: grid;
-  grid-template-columns: 30% 70%;
+.hero__wrapper {
   background-color: var(--bgGrey-color);
-  padding: 40px 56px;
-  overflow: hidden;
+  height: 100vh;
+}
+
+.hero {
+  width: 100%;
+  max-width: 1406px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns:  30% 70%;
+  background-color: var(--bgGrey-color);
+  padding: 30px 56px;
 }
