@@ -1,9 +1,7 @@
-// import { UserNotFound } from './UserNotFoundPage'
+import { UserNotFound } from '../components/UserNotFound/UserNotFound';
 
-
-
-// export const UserNotFoundPage = () => {
-//   return (
-//     <UserNotFound/>
-//   );
-// };
+export const UserNotFoundPage = () => {
+  return (
+    <UserNotFound />
+  );
+};

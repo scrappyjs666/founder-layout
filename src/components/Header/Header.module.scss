@@ -52,3 +52,21 @@ input::placeholder {
   background-repeat: no-repeat;
   background-color: transparent;
 }
+
+
+@media screen and (max-width:750px) {
+  .header {
+    display: grid;
+    justify-items: center;
+    padding: 0 0 10px 0;
+  }
+  .header__logo {
+    margin: 16px 0;
+  }
+}
+
+@media screen and (max-width:990px) {
+  .input {
+    width: auto;
+  }
+}

@@ -51,3 +51,19 @@
   content: url(./img/social-followers.svg);
   margin-right: 12px;
 }
+
+@media screen and (max-width:990px) {
+  .user__profile {
+    margin: 0 0 20px 0;
+  }
+}
+
+@media screen and (max-width:520px) {
+  .user-profile__img {
+    max-width: 270px;
+  }
+  .user-profile__social {
+    display: grid;
+    justify-items: center;
+  }
+}

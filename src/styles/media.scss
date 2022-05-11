@@ -1,0 +1,67 @@
+@media screen and (max-width:990px) {
+  .container {
+    max-width: 750px ;
+  } 
+  .hero {
+    grid-template-columns: auto;
+    justify-items: center;
+    text-align: center;
+  }
+  .input {
+    width: auto;
+  }
+  .user__profile {
+    margin: 0 0 20px 0;
+  }
+  .pagination__text {
+    margin: 0;
+  }
+  .user__repositories {
+    margin: 0;
+  }
+}
+
+@media screen and (max-width:750px) {
+  .container {
+    max-width: 520px ;
+  }
+  .header {
+    display: grid;
+    justify-items: center;
+    padding: 0 0 10px 0;
+  }
+  .header__logo {
+    margin: 16px 0;
+  }
+  .pagination {
+    display: grid;
+    justify-content: center;
+    row-gap: 10px;
+  }
+}
+
+@media screen and (max-width:520px) {
+  .container {
+    max-width: 320px ;
+    padding: 0;
+  }
+  .hero {
+    padding: 30px 0px;
+  }
+  .user-profile__img {
+    max-width: 270px;
+  }
+  .pagination__list {
+    display: block;
+  }
+  .user-profile__social {
+    display: grid;
+    justify-items: center;
+  }
+}
+
+@media screen and (max-width:320px) {
+  .container {
+    max-width: none;
+  }
+}

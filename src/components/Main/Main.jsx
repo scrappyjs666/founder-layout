@@ -1,14 +1,14 @@
 import { Container } from '../Container/Container';
-import styles from './Main.module.scss'
+import styles from './Main.module.scss';
 
-export const Main = ({children}) => {
+export const Main = ({ children }) => {
   return (
-      <Container> 
+    <Container>
       <div className={styles.hero__wrapper}>
         <div className={styles.hero}>
           {children}
         </div>
       </div>
-      </Container>
+    </Container>
   );
 };

@@ -5,10 +5,10 @@ import { Main } from '@components/Main/Main';
 export const StartSearchingPage = () => {
   return (
     <>
-      <Header/>
+      <Header />
       <Main>
-        <StartSearching/>
+        <StartSearching />
       </Main>
-    </> 
+    </>
   );
 };
