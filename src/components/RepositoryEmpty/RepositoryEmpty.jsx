@@ -7,6 +7,7 @@ export const RepositoryEmpty = () => {
       <img
         className={styles.repositoryEmpty__image}
         src={listEmpty}
+        alt='User Repositories Empty'
       />
       <span
         className={styles.repositoryEmpty__text}

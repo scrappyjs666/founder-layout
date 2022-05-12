@@ -6,10 +6,10 @@ export const UserNotFound = () => {
   return (
     <Container>
       <div className={styles.wrapper}>
-        <image
+        <img
           src={UserNoFound}
           className={styles.userNotFound__image}
-          alt="image User not found"
+          alt="User not found"
         />
         <h2
           className={styles.userNotFound__text}

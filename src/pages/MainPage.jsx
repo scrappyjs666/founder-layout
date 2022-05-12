@@ -9,6 +9,7 @@ import Pagination from '@components/Pagination/Pagination';
 import {
   useState, useEffect, useCallback, useRef,
 } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { usersUrl } from '@constants/api.jsx';
 import { getApiResource } from '@utils/network';
 import Prealoder from '@components/UI/Preloader/Preloader';
@@ -25,18 +26,20 @@ export const MainPage = () => {
   const [currentRepos, setCurrentRepos] = useState([]);
   const pageSize = 4;
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const findUser = () => {
+  const findUser = async () => {
     setLoading(true);
     setUserNickName(inputValue);
     const reposUrl = `${usersUrl + inputValue}/repos?page=${githubPageref.current}`;
     const profileUrl = usersUrl + inputValue;
-    getApiResource(reposUrl)
+    await getApiResource(reposUrl)
       .then((data) => {
+        if (!data) { navigate('UserNotFoundPage'); }
         setRepos([...data, ...repos]);
         reposRef.current = ([...repos, ...data]);
       });
-    getApiResource(profileUrl)
+    await getApiResource(profileUrl)
       .then((data) => {
         setUserProfile(data);
         setLoading(false);
@@ -44,6 +47,7 @@ export const MainPage = () => {
   };
   // eslint-disable-next-line no-shadow
   const handleChange = useCallback((page) => {
+    console.log(reposCount/4, typeof (reposCount/pageSize));
     setPage(page);
     if (page === Math.ceil((repos.length / pageSize)) && repos.length < reposCount) {
       githubPageref.current += 1;

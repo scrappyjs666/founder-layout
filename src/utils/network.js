@@ -1,10 +1,6 @@
 export const getApiResource = async (url) => {
   try {
-    const res = await fetch(url, {
-      headers: {
-        Authorization: 'token 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',
-      },
-    });
+    const res = await fetch(url);
 
     if (!res.ok) {
       console.error('Could not fetch.', res.status);

@@ -11,7 +11,12 @@ export const StartSearching = () => {
           src={imgloupe}
           alt="loupe"
         />
-        <h2 className={styles.search__title}>Start with searching a GitHub user</h2>
+        <h2
+          className={styles.search__title}
+        >
+          Start with searching a GitHub user
+
+        </h2>
       </div>
     </Container>
   );

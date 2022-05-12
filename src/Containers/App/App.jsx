@@ -1,17 +1,22 @@
 import { useNavigate, Routes, Route } from 'react-router-dom';
-import { MainPage } from '../../pages/MainPage';
-import { StartSearchingPage } from '../../pages/StartSearchPage';
-import { Page404 } from '../../pages/Page404';
-import { UserNotFoundPage } from '../../pages/UserNotFoundPage';
+import { Header } from '@components/Header/Header';
+import { MainPage } from '@pages/MainPage';
+import { StartSearchingPage } from '@pages/StartSearchPage';
+import { UserNotFoundPage } from '@pages/UserNotFoundPage';
 
-const App = () => {
+const App = ({ findUser, setinputValue }) => {
   return (
-    <Routes>
-      <Route path="/" element={<MainPage />} />
-      <Route path="StartSearchingPage" element={<StartSearchingPage />} />
-      <Route path="UserNotFoundPage" element={<UserNotFoundPage />} />
-      <Route path="404" element={<Page404 />} />
-    </Routes>
+    <>
+      {/* <Header
+        findUser={findUser}
+        setinputValue={setinputValue}
+      /> */}
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="a" element={<StartSearchingPage />} />
+        <Route path="UserNotFoundPage" element={<UserNotFoundPage />} />
+      </Routes>
+    </>
   );
 };
 
