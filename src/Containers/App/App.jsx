@@ -7,13 +7,13 @@ import { UserNotFoundPage } from '@pages/UserNotFoundPage';
 const App = ({ findUser, setinputValue }) => {
   return (
     <>
-      {/* <Header
+      <Header
         findUser={findUser}
         setinputValue={setinputValue}
-      /> */}
+      />
       <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="a" element={<StartSearchingPage />} />
+        <Route path="StartSearchingPage" element={<MainPage />} />
+        <Route path="/" element={<StartSearchingPage />} />
         <Route path="UserNotFoundPage" element={<UserNotFoundPage />} />
       </Routes>
     </>

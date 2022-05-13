@@ -27,6 +27,7 @@ export const MainPage = () => {
   const pageSize = 4;
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [eror, setEror] = useState(null);
 
   const findUser = async () => {
     setLoading(true);
@@ -45,11 +46,12 @@ export const MainPage = () => {
         setLoading(false);
       });
   };
+
   // eslint-disable-next-line no-shadow
   const handleChange = useCallback((page) => {
-    console.log(reposCount/4, typeof (reposCount/pageSize));
+    const numberOfPage = Math.ceil(reposCount / 30);
     setPage(page);
-    if (page === Math.ceil((repos.length / pageSize)) && repos.length < reposCount) {
+    if (page === Math.ceil(repos.length / pageSize) && repos.length < reposCount) {
       githubPageref.current += 1;
       findUser();
     }
@@ -70,7 +72,7 @@ export const MainPage = () => {
   };
 
   const handleClickNext = () => {
-    if (page + 1 === Math.ceil((repos.length / pageSize)) && repos.length < reposCount) {
+    if (page + 1 === Math.ceil(repos.length / pageSize) && repos.length < reposCount) {
       githubPageref.current += 1;
       findUser();
     }
@@ -98,62 +100,52 @@ export const MainPage = () => {
 
   const amount = Array.from(Array(pages.length), (_, i) => i);
   return (
-    <>
-      <Header
-        findUser={findUser}
-        setinputValue={setinputValue}
-      />
-      <Main>
-        {userProfile
+    <Main>
+      <>
+        {loading ? <Prealoder /> : null}
+        <UserProfile
+          avatar={userProfile.avatar_url}
+          name={userProfile.name}
+          userName={userProfile.login}
+          link={userProfile.html_url}
+          followers={userProfile.followers}
+          following={userProfile.following}
+        />
+        {reposCount
           ? (
-            <>
-              {loading ? <Prealoder /> : null}
-              <UserProfile
-                avatar={userProfile.avatar_url}
-                name={userProfile.name}
-                userName={userProfile.login}
-                link={userProfile.html_url}
-                followers={userProfile.followers}
-                following={userProfile.following}
+            <UserRepositories
+              title="Repositories"
+              reposCount={reposCount}
+            >
+              <ul
+                className="card__list"
+              >
+                {currentRepos.map((el) => (
+                  <Card
+                    name={el.name}
+                    link={el.html_url}
+                    description={el.description
+                      ? el.description
+                      : '!-------The author has not written a description yet---------!'}
+                    key={el.html_url}
+                  />
+                ))}
+              </ul>
+              <Pagination
+                setinputValue={setinputValue}
+                handleClickPrev={handleClickPrev}
+                pageSize={pageSize}
+                page={page}
+                reposCount={reposCount}
+                amount={amount}
+                handleChange={handleChange}
+                currentRepos={currentRepos}
+                handleClickNext={handleClickNext}
               />
-              {reposCount
-                ? (
-                  <UserRepositories
-                    title="Repositories"
-                    reposCount={reposCount}
-                  >
-                    <ul
-                      className="card__list"
-                    >
-                      {currentRepos.map((el) => (
-                        <Card
-                          name={el.name}
-                          link={el.html_url}
-                          description={el.description
-                            ? el.description
-                            : '!-------The author has not written a description yet---------!'}
-                          key={el.html_url}
-                        />
-                      ))}
-                    </ul>
-                    <Pagination
-                      setinputValue={setinputValue}
-                      handleClickPrev={handleClickPrev}
-                      pageSize={pageSize}
-                      page={page}
-                      reposCount={reposCount}
-                      amount={amount}
-                      handleChange={handleChange}
-                      currentRepos={currentRepos}
-                      handleClickNext={handleClickNext}
-                    />
-                  </UserRepositories>
-                )
-                : <RepositoryEmpty />}
-            </>
+            </UserRepositories>
           )
-          : <StartSearching />}
-      </Main>
-    </>
+          : <RepositoryEmpty />}
+      </>
+    </Main>
   );
 };
