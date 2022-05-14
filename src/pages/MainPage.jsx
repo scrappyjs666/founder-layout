@@ -1,52 +1,22 @@
-import { Header } from '@components/Header/Header';
 import { Main } from '@components/Main/Main';
 import { Card } from '@components/Card/Card';
+import { CardList } from '@components/CardList/CardList';
 import { UserRepositories } from '@components/UserRepositories/UserRepositories';
 import { UserProfile } from '@components/UserProfile/UserProfile';
 import { RepositoryEmpty } from '@components/RepositoryEmpty/RepositoryEmpty';
-import { StartSearching } from '@components/StartSearching/StartSearching';
 import Pagination from '@components/Pagination/Pagination';
 import {
-  useState, useEffect, useCallback, useRef,
+  useState, useEffect, useCallback,
 } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { usersUrl } from '@constants/api.jsx';
-import { getApiResource } from '@utils/network';
 import Prealoder from '@components/UI/Preloader/Preloader';
 
-export const MainPage = () => {
-  const githubPageref = useRef(1);
-  const reposRef = useRef([]);
-  const [userNickName, setUserNickName] = useState('');
-  const [userProfile, setUserProfile] = useState('');
-  const [repos, setRepos] = useState([]);
-  const [inputValue, setinputValue] = useState('');
+export const MainPage = ({
+  repos, userProfile, loading, reposRef, setinputValue, githubPageref, findUser,
+}) => {
   const [reposCount, setReposCount] = useState(0);
   const [page, setPage] = useState(1);
   const [currentRepos, setCurrentRepos] = useState([]);
   const pageSize = 4;
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  const [eror, setEror] = useState(null);
-
-  const findUser = async () => {
-    setLoading(true);
-    setUserNickName(inputValue);
-    const reposUrl = `${usersUrl + inputValue}/repos?page=${githubPageref.current}`;
-    const profileUrl = usersUrl + inputValue;
-    await getApiResource(reposUrl)
-      .then((data) => {
-        if (!data) { navigate('UserNotFoundPage'); }
-        setRepos([...data, ...repos]);
-        reposRef.current = ([...repos, ...data]);
-      });
-    await getApiResource(profileUrl)
-      .then((data) => {
-        setUserProfile(data);
-        setLoading(false);
-      });
-  };
-
   // eslint-disable-next-line no-shadow
   const handleChange = useCallback((page) => {
     const numberOfPage = Math.ceil(reposCount / 30);
@@ -102,7 +72,6 @@ export const MainPage = () => {
   return (
     <Main>
       <>
-        {loading ? <Prealoder /> : null}
         <UserProfile
           avatar={userProfile.avatar_url}
           name={userProfile.name}
@@ -117,20 +86,21 @@ export const MainPage = () => {
               title="Repositories"
               reposCount={reposCount}
             >
-              <ul
-                className="card__list"
-              >
-                {currentRepos.map((el) => (
-                  <Card
-                    name={el.name}
-                    link={el.html_url}
-                    description={el.description
-                      ? el.description
-                      : '!-------The author has not written a description yet---------!'}
-                    key={el.html_url}
-                  />
-                ))}
-              </ul>
+              {loading ? <Prealoder />
+                : (
+                  <CardList>
+                    {currentRepos.map((el) => (
+                      <Card
+                        name={el.name}
+                        link={el.html_url}
+                        description={el.description
+                          ? el.description
+                          : '!-------The author has not written a description yet---------!'}
+                        key={el.html_url}
+                      />
+                    ))}
+                  </CardList>
+                )}
               <Pagination
                 setinputValue={setinputValue}
                 handleClickPrev={handleClickPrev}
