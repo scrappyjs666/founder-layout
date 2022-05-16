@@ -5,9 +5,7 @@ import { UserRepositories } from '@components/UserRepositories/UserRepositories'
 import { UserProfile } from '@components/UserProfile/UserProfile';
 import { RepositoryEmpty } from '@components/RepositoryEmpty/RepositoryEmpty';
 import Pagination from '@components/Pagination/Pagination';
-import {
-  useState, useEffect, useCallback,
-} from 'react';
+import { useState, useEffect } from 'react';
 import Prealoder from '@components/UI/Preloader/Preloader';
 
 export const MainPage = ({
@@ -18,22 +16,21 @@ export const MainPage = ({
   const [currentRepos, setCurrentRepos] = useState([]);
   const pageSize = 4;
   // eslint-disable-next-line no-shadow
-  const handleChange = useCallback((page) => {
-    const numberOfPage = Math.ceil(reposCount / 30);
+  const handleChange = (page) => {
     setPage(page);
-    if (page === Math.ceil(reposRef.current.length / pageSize) && reposRef.current.length < reposCount) {
-      githubPageref.current += 1;
-      getMoreRepos();
-    }
-  }, [page]);
+    githubPageref.current = page;
+    getMoreRepos();
+  };
 
   const findReposInex = () => {
-    const lastReposIndex = page * pageSize;
-    const firstReposIndex = lastReposIndex - pageSize;
-    setCurrentRepos(reposRef.current.slice(firstReposIndex, lastReposIndex));
+    if (reposRef.current.length > 1) {
+      setCurrentRepos(reposRef.current.slice(0.4));
+    }
   };
 
   const handleClickPrev = () => {
+    githubPageref.current = page - 1;
+    getMoreRepos();
     if (page > 1) {
       setPage((prevValue) => {
         return prevValue - 1;
@@ -42,10 +39,8 @@ export const MainPage = ({
   };
 
   const handleClickNext = () => {
-    if (page + 1 === Math.ceil(reposRef.current.length / pageSize) && reposRef.curren.length < reposCount) {
-      githubPageref.current += 1;
-      getMoreRepos();
-    }
+    githubPageref.current = page + 1;
+    getMoreRepos();
     // eslint-disable-next-line no-use-before-define
     if (page < amount.length) {
       setPage((prevValue) => {

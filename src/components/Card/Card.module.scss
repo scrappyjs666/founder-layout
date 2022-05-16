@@ -21,4 +21,7 @@
   font-size: 16px;
   line-height: 1.2;
   font-weight: var(--fw-light);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: anywhere;
 }
