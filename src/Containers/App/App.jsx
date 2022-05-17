@@ -10,6 +10,7 @@ import { getApiResource } from '@utils/network';
 const App = () => {
   const githubPageref = useRef(1);
   const reposRef = useRef([]);
+  const userNickNameRef = useRef('');
   const [userProfile, setUserProfile] = useState('');
   const [inputValue, setinputValue] = useState('');
   const [loading, setLoading] = useState(false);
@@ -21,6 +22,7 @@ const App = () => {
       reposRef.current = JSON.parse(localStorage.getItem('reposUrl'));
       setUserProfile(JSON.parse(localStorage.getItem('profileUrl')));
       setinputValue(JSON.parse(localStorage.getItem('profileUrl')).login);
+      userNickNameRef.current = userProfile.login;
     }
   }, []);
 
@@ -33,8 +35,6 @@ const App = () => {
     const profileUrl = usersUrl + inputValue;
     await getApiResource(reposUrl)
       .then((data) => {
-        if (data) { navigate('MainPage'); }
-        if (!data) { navigate('UserNotFoundPage'); }
         reposRef.current = data;
         localStorage.setItem('reposUrl', JSON.stringify(data));
       });
@@ -43,9 +43,11 @@ const App = () => {
         setUserProfile(data);
         localStorage.setItem('profileUrl', JSON.stringify(data));
         setTimeout(() => { setLoading(false); }, 2000);
+        userNickNameRef.current = data.login;
+        if (data) { navigate(`MainPage/repos/users:${userNickNameRef.current}/page/`); }
+        if (!data) { navigate('UserNotFoundPage'); }
       });
   };
-
   const getMoreRepos = async () => {
     const reposUrl = `${usersUrl + inputValue}/repos?page=${githubPageref.current}&per_page=${pageSize}`;
     await getApiResource(reposUrl)
@@ -59,10 +61,11 @@ const App = () => {
       <Header
         findUser={findUser}
         setinputValue={setinputValue}
+        inputValue={inputValue}
       />
       <Routes>
         <Route
-          path="MainPage"
+          path={`MainPage/repos/users:${userNickNameRef.current}/page/*`}
           element={(
             <MainPage
               userProfile={userProfile}

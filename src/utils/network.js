@@ -4,7 +4,7 @@ export const getApiResource = async (url) => {
       url,
       {
         headers: {
-          authorization: 'token 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',
+          authorization: 'token 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',
         },
       },
     );

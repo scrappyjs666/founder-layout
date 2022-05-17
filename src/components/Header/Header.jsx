@@ -1,8 +1,11 @@
+import { Link } from 'react-router-dom';
 import { Container } from '../Container/Container';
 import githublogo from './img/githublogo.png';
 import styles from './Header.module.scss';
 
-export const Header = ({ findUser, setinputValue, children }) => {
+export const Header = ({
+  findUser, setinputValue, inputValue, children,
+}) => {
   return (
     <Container>
       <div className={styles.header__wrapper}>
@@ -29,12 +32,15 @@ export const Header = ({ findUser, setinputValue, children }) => {
                 type="text"
                 className={styles.input}
               />
-              <button
-                onClick={() => findUser()}
-                type="button"
-                className={styles.header__loupe}
-              >
-              </button>
+              <Link to={`MainPage/repos/users:${inputValue}/page/`}>
+                <button
+                  onClick={() => findUser()}
+                  type="button"
+                  className={styles.header__loupe}
+                >
+                </button>
+
+              </Link>
             </form>
           </div>
         </header>
