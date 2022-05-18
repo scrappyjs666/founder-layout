@@ -1,12 +1,19 @@
-.user__card {
-  max-height: 112px;
-  max-width: 877px;
+.user-card__wrap {
+  padding-bottom: 24px;
   background-color: var(--color-white);
-  padding: 24px 32px;
   border-radius: 6px;
   &:not(:last-child) {
     margin-bottom: 24px;
   }
+}
+
+.user__card {
+  max-height: 112px-24px;
+  max-width: 877px;
+  background-color: var(--color-white);
+  padding: 24px 32px;
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 .user-card__title {
@@ -26,3 +33,4 @@
   overflow: hidden;
   word-break: break-all;
 }
+

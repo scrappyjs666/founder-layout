@@ -6,7 +6,7 @@ const PaginationButton = (page, handleChange, res) => {
   return (
     <NavLink
       onClick={() => handleChange(res + 1)}
-      to={res + 1}
+      to={`${res + 1}`}
       className={cn(styles.pagination__item, {
         [styles.active]: page === res + 1,
       })}
