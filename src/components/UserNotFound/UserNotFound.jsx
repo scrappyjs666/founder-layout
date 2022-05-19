@@ -1,5 +1,5 @@
 import { Container } from '../Container/Container';
-import UserNoFound from './img/UserNotFound.png';
+import UserNoFound from './img/UserNotFound.svg';
 import styles from './UserNotFound.module.scss';
 
 export const UserNotFound = () => {

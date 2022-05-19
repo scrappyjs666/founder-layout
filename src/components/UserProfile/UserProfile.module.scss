@@ -43,15 +43,11 @@
 
 
 .user-profile__following::before {
-  width: 24px;
-  height: 24px;
   content: url(./img/social-following.svg);
   margin-right: 12px;
 }
 
 .user-profile__followers::before {
-  width: 24px;
-  height: 24px;
   content: url(./img/social-followers.svg);
   margin-right: 12px;
 }

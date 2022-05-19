@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './Pagination.module.scss';
 
@@ -6,7 +6,7 @@ const PaginationButton = (page, handleChange, res) => {
   return (
     <NavLink
       onClick={() => handleChange(res + 1)}
-      to={`${res + 1}`}
+      to={`StartPage/repos/page/${res + 1}`}
       className={cn(styles.pagination__item, {
         [styles.active]: page === res + 1,
       })}
@@ -18,7 +18,7 @@ const PaginationButton = (page, handleChange, res) => {
 };
 const Pagination = ({
   handleClickPrev,
-  pageSize,
+  elementsCount,
   page,
   reposCount,
   amount,
@@ -29,9 +29,9 @@ const Pagination = ({
     <div className={styles.pagination__wrap}>
       <ul className={styles.pagination__list}>
         <div className={styles.pagination__count}>
-          {pageSize * page <= reposCount ? pageSize * page - 4 : reposCount}
+          {elementsCount * page <= reposCount ? elementsCount * page - 4 : reposCount}
           -
-          {pageSize * page <= reposCount ? pageSize * page : reposCount}
+          {elementsCount * page <= reposCount ? elementsCount * page : reposCount}
           {' '}
           of
           {' '}

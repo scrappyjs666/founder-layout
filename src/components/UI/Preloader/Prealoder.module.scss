@@ -1,10 +1,14 @@
 .prealoder {
-  display: grid;
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
-  max-width: 300px;
-  max-height: 300px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  max-width: 320px;
+  max-height: 320px;
   z-index: 100;
 }
 

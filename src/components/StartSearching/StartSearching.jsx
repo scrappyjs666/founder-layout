@@ -1,6 +1,6 @@
 import { Container } from '@components/Container/Container';
 import styles from './StartSearching.module.scss';
-import imgloupe from './img/loupe.png';
+import imgloupe from './img/loupe.svg';
 
 export const StartSearching = () => {
   return (
