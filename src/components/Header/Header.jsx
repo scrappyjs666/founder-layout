@@ -1,16 +1,14 @@
-import { Link } from 'react-router-dom';
 import githublogo from './img/githublogo.svg';
 import styles from './Header.module.scss';
 
 export const Header = ({
-  findUser, setInputValue, inputValue, children,
+  findUser, setInputValue, children,
 }) => {
   return (
     <div className={styles.header__wrapper}>
       {children}
-      <canvas className="canvas"></canvas>
       <header className={styles.header}>
-        <a href="/#">
+        <a href="StartPage">
           <img
             draggable="false"
             src={githublogo}
@@ -31,15 +29,12 @@ export const Header = ({
               type="text"
               className={styles.input}
             />
-            <Link to={`StartPage/repos/users:${inputValue}/page/`}>
-              <button
-                onClick={() => findUser()}
-                type="button"
-                className={styles.header__loupe}
-              >
-              </button>
-
-            </Link>
+            <button
+              onClick={() => findUser()}
+              type="button"
+              className={styles.header__loupe}
+            >
+            </button>
           </form>
         </div>
       </header>

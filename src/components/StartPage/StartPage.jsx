@@ -10,25 +10,42 @@ import Prealoder from '@components/UI/Preloader/Preloader';
 import { useState, useRef, useEffect } from 'react';
 import { StartSearching } from '@components/StartSearching/StartSearching';
 import { UserNotFound } from '@components/UserNotFound/UserNotFound';
-import { usersUrl } from '../../api/constant';
-import { getApiResource } from '../../api/network';
+import { useNavigate } from 'react-router-dom';
+import { usersUrl } from '@api/constant';
+import { getApiResource } from '@api/network';
+import TopBarProgress from 'react-topbar-progress-indicator';
 
 export const StartPage = () => {
   const [reposCount, setReposCount] = useState(0);
   const [page, setPage] = useState(1);
-  const [currentRepos, setCurrentRepos] = useState([]);
   const elementsCount = 4;
   const githubPageref = useRef(1);
   const [repos, setRepos] = useState([]);
   const [userProfile, setUserProfile] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [loading, setLoading] = useState(false);
+  const [loadingPage, setLoadingPage] = useState(false);
   const [error, setError] = useState(false);
+  const navigate = useNavigate();
 
-  const findUser = () => {
+  TopBarProgress.config({
+    barColors: {
+      0: '#fff',
+      '1.0': '#00ff00',
+    },
+    shadowBlur: 5,
+  });
+
+  const clearState = () => {
+    setPage(1);
     setError(false);
     setRepos([]);
     setLoading(true);
+    githubPageref.current = 1;
+  };
+
+  const findUser = () => {
+    clearState();
     const reposUrl = `${usersUrl + inputValue}/repos?page=${githubPageref.current}&per_page=${elementsCount}`;
     const profileUrl = usersUrl + inputValue;
     getApiResource(reposUrl)
@@ -44,26 +61,18 @@ export const StartPage = () => {
   };
 
   const getMoreRepos = () => {
+    setLoadingPage(true);
     const reposUrl = `${usersUrl + inputValue}/repos?page=${githubPageref.current}&per_page=${elementsCount}`;
     getApiResource(reposUrl)
       .then((data) => {
         setRepos(data);
+        setLoadingPage(false);
       });
   };
 
-  const pages = [];
-
-  for (let i = 1; i <= Math.ceil(reposCount / elementsCount); i += 1) {
-    pages.push(i);
-  }
+  const pages = Array.from({ length: Math.ceil(reposCount / elementsCount) }, (_, i) => i + 1);
 
   const amount = Array.from(Array(pages.length), (_, i) => i);
-
-  const findReposInex = () => {
-    if (repos.length > 1) {
-      setCurrentRepos(repos.slice(0, elementsCount));
-    }
-  };
 
   const handleChange = (page) => {
     setPage(page);
@@ -92,12 +101,21 @@ export const StartPage = () => {
   };
 
   useEffect(() => {
-    findReposInex();
+    if (repos.length > 1) {
+      repos.slice(0, elementsCount);
+    }
   }, [repos.length, page]);
 
   useEffect(() => {
     setReposCount(userProfile.public_repos);
   }, [userProfile]);
+
+  useEffect(() => {
+    if (userProfile) {
+      navigate(`user/${userProfile.login}/page/${page}`);
+    }
+    if (error || userProfile.length < 1) { navigate('/*'); }
+  }, [userProfile, page]);
 
   return (
     <>
@@ -105,12 +123,14 @@ export const StartPage = () => {
         findUser={findUser}
         setInputValue={setInputValue}
         inputValue={inputValue}
-      />
+      >
+      </Header>
+      {loadingPage ? <TopBarProgress /> : null}
       {!loading ? (
         <>
-          {repos.length < 1 ? <StartSearching /> : null}
-          {error === true ? <UserNotFound /> : null}
-          {repos.length || reposCount > 1
+          {!userProfile && !error ? <StartSearching /> : null}
+          {error ? <UserNotFound /> : null}
+          {userProfile
             ? (
               <Main>
                 <>
@@ -129,7 +149,7 @@ export const StartPage = () => {
                         reposCount={reposCount}
                       >
                         <CardList>
-                          {currentRepos.map((el) => (
+                          {repos.map((el) => (
                             <Card
                               name={el.name}
                               link={el.html_url}
@@ -146,7 +166,7 @@ export const StartPage = () => {
                           reposCount={reposCount}
                           amount={amount}
                           handleChange={handleChange}
-                          currentRepos={currentRepos}
+                          currentRepos={repos}
                           handleClickNext={handleClickNext}
                           inputValue={inputValue}
                         />
