@@ -21,6 +21,7 @@ module.exports = {
     'react',
   ],
   rules: {
+    'no-shadow': 'off',
     'linebreak-style': 0,
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',

@@ -7,7 +7,7 @@ import { UserProfile } from '@components/UserProfile/UserProfile';
 import { RepositoryEmpty } from '@components/RepositoryEmpty/RepositoryEmpty';
 import Pagination from '@components/Pagination/Pagination';
 import Prealoder from '@components/UI/Preloader/Preloader';
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { StartSearching } from '@components/StartSearching/StartSearching';
 import { UserNotFound } from '@components/UserNotFound/UserNotFound';
 import { usersUrl } from '../../api/constant';
@@ -51,16 +51,33 @@ export const StartPage = () => {
       });
   };
 
-  // eslint-disable-next-line no-shadow
+  const pages = [];
+
+  for (let i = 1; i <= Math.ceil(reposCount / elementsCount); i += 1) {
+    pages.push(i);
+  }
+
+  const amount = Array.from(Array(pages.length), (_, i) => i);
+
+  const findReposInex = () => {
+    if (repos.length > 1) {
+      setCurrentRepos(repos.slice(0, elementsCount));
+    }
+  };
+
   const handleChange = (page) => {
     setPage(page);
     githubPageref.current = page;
     getMoreRepos();
   };
 
-  const findReposInex = () => {
-    if (repos.length > 1) {
-      setCurrentRepos(repos.slice(0, elementsCount));
+  const handleClickNext = () => {
+    githubPageref.current = page + 1;
+    getMoreRepos();
+    if (page < amount.length) {
+      setPage((prevValue) => {
+        return prevValue + 1;
+      });
     }
   };
 
@@ -74,19 +91,7 @@ export const StartPage = () => {
     }
   };
 
-  const handleClickNext = () => {
-    githubPageref.current = page + 1;
-    getMoreRepos();
-    // eslint-disable-next-line no-use-before-define
-    if (page < amount.length) {
-      setPage((prevValue) => {
-        return prevValue + 1;
-      });
-    }
-  };
-
   useEffect(() => {
-    console.log('eefff')
     findReposInex();
   }, [repos.length, page]);
 
@@ -94,13 +99,6 @@ export const StartPage = () => {
     setReposCount(userProfile.public_repos);
   }, [userProfile]);
 
-  const pages = [];
-
-  for (let i = 1; i <= Math.ceil(reposCount / elementsCount); i += 1) {
-    pages.push(i);
-  }
-
-  const amount = Array.from(Array(pages.length), (_, i) => i);
   return (
     <>
       <Header
