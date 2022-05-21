@@ -5,7 +5,7 @@ const App = () => {
   return (
     <Routes>
       <Route
-        path="*"
+        path="/*"
         element={(<StartPage />)}
       />
     </Routes>

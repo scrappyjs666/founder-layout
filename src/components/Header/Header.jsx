@@ -8,7 +8,7 @@ export const Header = ({
     <div className={styles.header__wrapper}>
       {children}
       <header className={styles.header}>
-        <a href="StartPage">
+        <a href="/*">
           <img
             draggable="false"
             src={githublogo}
