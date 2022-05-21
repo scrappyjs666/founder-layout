@@ -123,8 +123,7 @@ export const StartPage = () => {
         findUser={findUser}
         setInputValue={setInputValue}
         inputValue={inputValue}
-      >
-      </Header>
+      />
       {loadingPage ? <TopBarProgress /> : null}
       {!loading ? (
         <>

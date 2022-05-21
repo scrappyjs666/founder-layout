@@ -8,14 +8,12 @@ export const Header = ({
     <div className={styles.header__wrapper}>
       {children}
       <header className={styles.header}>
-        <a href="/*">
-          <img
-            draggable="false"
-            src={githublogo}
-            alt="githublogo"
-            className={styles.header__logo}
-          />
-        </a>
+        <img
+          draggable="false"
+          src={githublogo}
+          alt="githublogo"
+          className={styles.header__logo}
+        />
         <div className={styles.header__input}>
           <form
             onSubmit={(e) => e.preventDefault()}
