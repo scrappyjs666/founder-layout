@@ -1,5 +1,5 @@
 
-#  Genshin Application
+#  Github search app
 
 ## 🚀 About
 - Тестовое задание для прохождения в компанию https://www.paralect.com/
