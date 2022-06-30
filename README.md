@@ -1,4 +1,4 @@
-<!-- 
+
 #  Genshin Application
 
 ## 🚀 About
@@ -6,7 +6,7 @@
 - Макет тестового задания https://www.figma.com/file/nPPYeW9okkBbIfxafG8XJP/Startup-Summer-2022-Task?node-id=288%3A20
 
 ## 🐧 Links
-- `Project` paralect123321.netlify.app/
+- `Project` https://paralect123321.netlify.app/
 - `Repository` https://github.com/scrappyjs666/paralect
 - `Telegramm` https://t.me/scrappyzzz
 
