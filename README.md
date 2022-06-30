@@ -39,5 +39,5 @@
 ### React Router
 - Базовый роутинг
 - Обработка страницы 404 (Not Found)
-- Хуки `useLocation`/ `useParams`/ 'useNavigate
+- Хуки `useLocation`/ `useParams`/ `useNavigate`
 
